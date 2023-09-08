@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<body style = "background-color: rgb(0, 0, 255);">
+
+    <img id = "ballon" onmousedown="popped()" style = "position: absolute; width: 350px; top: 500px; left: 500px;" src = "ballon.png">
+    
+    <p id = "scoreText" style = "color: black; font-size: 20px; font-family: Arial;">Score: 0</p>
+</body>
+<script>
+
+    var score = 0;
+    var speed = 1;
+    function setLeft(id,x){document.getElementById(id).style.left=x+"px";}
+    function setTop(id,y){document.getElementById(id).style.top=y+"px";}
+    function getLeft(id){return document.getElementById(id).offsetLeft;}
+    function getTop(id){return document.getElementById(id).offsetTop;}
+    function randomNunber(low,high){return(Math.floor(low+Math.random()*(1+high-low)));}
+    var gameTimer = window.setInterval(floatUp, 25);
+
+    function floatUp(){
+        var y = getTop("ballon");
+        if (y < - 100){
+            gameOver();
+
+        }
+        setTop("ballon", y-speed);
+    }
+    function popped(){
+
+        score++;
+        speed++;
+        document.getElementById("scoreText").innerText= "Score: "+score;
+        setLeft("ballon", randomNunber(0,window.innerWidth-275));
+        setTop("ballon",window.innerHeight)
+    }
+    function gameOver(){
+        clearInterval(gameTimer);
+        alert("Game Over! jouw totaalscore was: "+score);
+        location.reload();
+    }
+    
+</script>
+</html>
